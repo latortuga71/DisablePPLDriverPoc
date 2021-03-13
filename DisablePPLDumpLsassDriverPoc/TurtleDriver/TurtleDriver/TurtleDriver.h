@@ -50,7 +50,7 @@ NTSTATUS TurtleDriverChangeProcessProtection(SIZE_T bufferInSize, PVOID bufferIn
 	//PULONG pFlags2 = NULL;
 	// lookup pid
 	status = PsLookupProcessByProcessId((HANDLE)inProcStruct->ProcessId, &targetProcess);
-	PROCESS_SIGNATURE_PROTECTION* SigProtect = (PROCESS_SIGNATURE_PROTECTION*)(((ULONG_PTR)targetProcess) + 0x878);
+	PROCESS_SIGNATURE_PROTECTION* SigProtect = (PROCESS_SIGNATURE_PROTECTION*)(((ULONG_PTR)targetProcess) + 0x878); // <- this offset only works for specific version of windows
 	SigProtect->SignatureLevel = inProcStruct->SigProtection.SignatureLevel; //0x3f;
 	SigProtect->SectionSignatureLevel = inProcStruct->SigProtection.SectionSignatureLevel;//0x3f;
 	SigProtect->Protection = inProcStruct->SigProtection.Protection;
